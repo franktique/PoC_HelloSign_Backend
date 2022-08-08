@@ -90,6 +90,19 @@ app.get('/getFileBySignatureRequestId/:signatureRequestId',  (req, res) => {
   });
 });
 
+app.get('/templates/files/:templateId',  (req, res) => {
+
+  hellosign.template.files(req.params['templateId'], {file_type: 'pdf'}, function(err, response) {
+      if (err) {
+        console.log(err)
+        res.send(err);
+      }
+      res.contentType("application/pdf");
+      response.pipe(res);
+
+  });
+
+});
 
 
 app.listen(port, () => {
